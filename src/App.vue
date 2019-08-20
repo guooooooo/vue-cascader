@@ -1,26 +1,72 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <Cascader :options="options"></Cascader>
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import Cascader from './components/Cascader.vue';
 
 export default {
-  name: 'app',
-  components: {
-    HelloWorld,
+  components: { Cascader },
+  data() {
+    return {
+      options: [
+        {
+          label: '肉类',
+          children: [
+            {
+              label: '猪肉',
+              children: [
+                {
+                  label: '五花肉',
+                },
+                {
+                  label: '里脊肉',
+                },
+              ],
+            },
+            {
+              label: '鸡肉',
+              children: [
+                {
+                  label: '鸡腿',
+                },
+                {
+                  label: '鸡翅',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: '蔬菜',
+          children: [
+            {
+              label: '叶菜类',
+              children: [
+                {
+                  label: '大白菜',
+                },
+                {
+                  label: '小白菜',
+                },
+              ],
+            },
+            {
+              label: '根茎类',
+              children: [
+                {
+                  label: '萝卜',
+                },
+                {
+                  label: '土豆',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
   },
 };
 </script>
-<style lang="stylus">
-#app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-  margin-top 60px
-</style>
