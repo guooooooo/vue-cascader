@@ -6,14 +6,23 @@
       </div>
     </div>
     <div class="content-right" v-if="lists && lists.length">
-      <CascaderItem :options="lists"></CascaderItem>
+      <CascaderItem :options="lists" :level="level+1" @change="change" :value="value"></CascaderItem>
     </div>
   </div>
 </template>
 <script>
+import cloneDeep from 'lodash/cloneDeep';
+
 export default {
   name: 'CascaderItem',
   props: {
+    level: {
+      type: Number,
+    },
+    value: {
+      type: Array,
+      default: () => [],
+    },
     options: {
       type: Array,
       default: () => [],
@@ -26,11 +35,18 @@ export default {
   },
   computed: {
     lists() {
-      return this.currentSelected && this.currentSelected.children;
+      return this.value[this.level] && this.value[this.level].children;
     },
   },
   methods: {
+    change(value) {
+      this.$emit('change', value);
+    },
     select(item) {
+      const cloneValue = cloneDeep(this.value);
+      cloneValue[this.level] = item;
+      cloneValue.splice(this.level + 1);
+      this.$emit('change', cloneValue);
       this.currentSelected = item;
     },
   },

@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Cascader :options="options"></Cascader>
+    <div>
+      {{this.value}}
+    </div>
+    <Cascader :options="options" v-model="value"></Cascader>
   </div>
 </template>
 <script>
@@ -10,6 +13,7 @@ export default {
   components: { Cascader },
   data() {
     return {
+      value: [],
       options: [
         {
           label: '肉类',

@@ -4,7 +4,7 @@
       title
     </div>
     <div v-if="isVisible">
-      <cascader-item :options="options"></cascader-item>
+      <cascader-item :options="options" :value="value" :level="0" @change="change"></cascader-item>
     </div>
   </div>
 </template>
@@ -21,6 +21,10 @@ export default {
     CascaderItem,
   },
   props: {
+    value: {
+      type: Array,
+      default: () => [],
+    },
     options: {
       type: Array,
       default: () => [],
@@ -32,6 +36,9 @@ export default {
     };
   },
   methods: {
+    change(value) {
+      this.$emit('input', value);
+    },
     close() {
       this.isVisible = false;
     },
