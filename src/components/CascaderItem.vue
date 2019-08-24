@@ -35,7 +35,14 @@ export default {
   },
   computed: {
     lists() {
-      return this.value[this.level] && this.value[this.level].children;
+      if (this.value[this.level] && this.value[this.level].id) {
+        const o = this.options.find(item => item.id === this.value[this.level].id);
+        return o.children;
+      }
+      return [];
+
+      // 总的options变化率不会触发更新
+      // return this.value[this.level] && this.value[this.level].children;
     },
   },
   methods: {
@@ -55,4 +62,20 @@ export default {
 <style lang="stylus" scoped>
 .content
   display flex
+.content-left
+  border 1px solid #ccc
+  min-height 100px
+  max-height 150px
+  overflow-y auto
+.content-right
+  margin-left -1px
+.label
+  width 60px
+  font-size 12px
+  line-height 20px
+  color #606266
+  padding-left 10px
+  cursor pointer
+.label:hover
+  background #f5f7fa
 </style>
